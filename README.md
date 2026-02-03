@@ -11,7 +11,7 @@ A pixel-perfect, dark-mode calculator web app inspired by the classic macOS desi
 - **Smart Operators:** Prevents operator stacking (e.g., typing `++` or `+*`) by overwriting with the latest selection.
 - **Modifier Keys:** Fully functional `AC` (All Clear), `+/-` (Sign Toggle), and `%` (Percentage) buttons.
 - **Clean UI:** Responsive CSS Grid layout with hover and active states for a tactile feel.
-- **Math Engine:** Parses strings into tokens for calculation without using the `eval()` function.
+- **Math Engine:** Parses strings into tokens for calculation without using the `eval()` function and follows all the Precedence rules.
 
 ## 🛠️ Tech Stack
 - **HTML5:** Semantic structure using buttons for accessibility.
