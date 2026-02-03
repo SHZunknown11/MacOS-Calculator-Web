@@ -42,26 +42,42 @@ function clearDisplay() {
 
 
 function calculateResult() {
-    // 1. Turn the string into a list (Array)
-    const list = display.innerText.split(/([+\-×÷])/); 
+    let list = display.innerText.split(/([+\-×÷])/);
 
-    // 2. Set the starting total to the first item in the list
-    let total = Number(list[0]); 
+    // convert numbers
+    for (let i = 0; i < list.length; i++) {
+        if (!isNaN(list[i])) {
+            list[i] = Number(list[i]);
+        }
+    }
 
-    // 3. Look at the rest of the list, two items at a time
+    // handle × and ÷
+    let i = 0;
+    while (i < list.length) {
+        if (list[i] === '×') {
+            let result = list[i - 1] * list[i + 1];
+            list.splice(i - 1, 3, result);
+            i = 0; // restart scan
+        } 
+        else if (list[i] === '÷') {
+            let result = list[i - 1] / list[i + 1];
+            list.splice(i - 1, 3, result);
+            i = 0;
+        } 
+        else {
+            i++;
+        }
+    }
+
+    // handle + and -
+    let total = list[0];
+
     for (let i = 1; i < list.length; i += 2) {
-        let operator = list[i];     // This is the "+" or "×"
-        let nextNumber = Number(list[i+1]); // This is the "5" or "2"
-
-        // 4. Do the math based on the operator
-        if (operator === '+') total = total + nextNumber;
-        if (operator === '-') total = total - nextNumber;
-        if (operator === '×') total = total * nextNumber;
-        if (operator === '÷') total = total / nextNumber;
+        if (list[i] === '+') total += list[i + 1];
+        if (list[i] === '-') total -= list[i + 1];
     }
 
     display.innerText = total;
-    return total;
 }
 
 
